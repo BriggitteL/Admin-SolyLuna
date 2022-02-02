@@ -2,12 +2,22 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
+const url = "http://localhost:3001/api/habitaciones/tipos";
+
+
+
 // Pie Chart Example
 var ctx = document.getElementById("myPieChart");
+
+
+
+
+/*
+
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Directos", "Remitidos", "Redes sociales"],
+    labels: ["Direct", "Referral", "Social"],
     datasets: [{
       data: [55, 30, 15],
       backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
@@ -32,4 +42,4 @@ var myPieChart = new Chart(ctx, {
     },
     cutoutPercentage: 80,
   },
-});
+});*/

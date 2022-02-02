@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sol y Luna Admin - Panel de control</title>
+    <title>Sol y Luna Admin - Valoracion de habitaciones</title>
     <link rel="shortcut icon" href="img/logoicono.png">
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -281,33 +281,10 @@
 
                     <!-- Content Row -->
 
-                    <div class="row">
-
-                        <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Habitaciones con más reservas</h6>
-                                    
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <div class="col d-flex justify-content-center">
-                                            <a href="areachart.html"><button class="btn btn-primary" type="button">Visualizar</button></a>
-                                            
-                                        </div>
-
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col">   
 
                         <!-- Pie Chart -->
-                        <div class="col-xl-4 col-lg-5">
+                        <div class="col-xl-12 col-lg-8">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
@@ -318,44 +295,89 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
-                                        <div class="col d-flex justify-content-center">
-                                            <a href="piechart.html"><button class="btn btn-primary" type="button">Visualizar</button></a>
+                                        <div id = "piechart" class="col d-flex justify-content-center"></div>
+                                        <script src="http://d3js.org/d3.v3.min.js"></script>
+                                        <script>
                                             
-                                        </div>
+                                            var width = 300,
+                                                height = 200,
+                                            // find the min of width and height and devided by 2
+                                            radius = Math.min(width, height) / 2;
+
+                                            var color = d3.scale.ordinal().range(["#4e73df", "#1cc88a", "#36b9cc", "#6b486b"]);
+
+                                            var arc = d3.svg.arc()
+                                            // the outer radius of the pie chart.
+                                            .outerRadius(radius - 10)
+                                            // the inner radius of the pie chart, set 0 for now
+                                            .innerRadius(0);
+
+                                            // Constructs a new pie function
+                                            var pie = d3.layout.pie()
+                                                    // not sorting
+                                                    .sort(null)
+                                                    // set the pie chart value to population.
+                                                    .value(function(d) { return d.valoracion; });
+
+                                            var svg = d3.select("#piechart").append("svg:svg").attr("width", width)
+                                                    .attr("height", height)
+                                                .append("g")
+                                                    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+                                            d3.json("http://localhost:3001/api/habitaciones/tipos", function(error, data){
+                                                data.forEach(function(d) {
+                                                    d.valoracion = +d.valoracion;
+                                                });
+
+                                                // append a group
+                                                var g = svg.selectAll(".arc")
+                                                    .data(pie(data))
+                                                    .enter().append("g")
+                                                    .attr("class", "arc");
+
+                                                // append path, the pie for each age
+                                                g.append("path")
+                                                    .attr("d", arc)
+                                                    .style("fill", function(d) { return color(d.data.valoracion); });
+
+                                                // add text
+                                                g.append("text")
+                                                    .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+                                                    .attr("dy", ".35em")
+                                                    .style("text-anchor", "middle")
+                                                    .text(function(d) { return d.data.valoracion; });
+                                            });
+                                            
+                                        </script>
 
                                     </div>
                                     
+                                    <div class="mt-4 text-center small">
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-primary"></i> Doble
+                                        </span>
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-success"></i> Suite
+                                        </span>
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-info"></i> Colegas
+                                        </span>
+
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle" color="#6b486b"></i> Matrimonial
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Content Column -->
-                        <div class="col-lg-6 mb-4">
-                           
-                            <!-- Bar Chart -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Paises que más nos visitan</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <div class="col d-flex justify-content-center">
-                                            <a href="barchart.html"><button class="btn btn-primary" type="button">Visualizar</button></a>
-                                            
-                                        </div>
-
-                                    </div>
-                                    
-                                </div>
-                            </div>
+                        <div class="col d-flex justify-content-center">
+                            <a href="index.html"><button class="btn btn-primary" type="button">Regresar</button></a>
                             
-
                         </div>
                     </div>
+
+                    
 
                 </div>
                 <!-- /.container-fluid -->
