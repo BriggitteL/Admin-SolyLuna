@@ -1,26 +1,3 @@
-function cargarDatos(){
-    
-
-
-
-      fetch(`http://localhost:3002/AgregarRuta/${cedula}`).then(response => response.json()).then(data => {
-        document.getElementById('ordenes_tablas').innerHTML = '';
-        for(let cliente of data){
-          
-          let plan = `<tr>
-            <td>${cliente.cedula}</td>
-            <td>${cliente.nombre}</td>
-            <td>${cliente.apellido}</td>
-            <td>${cliente.habitacion}</td>
-            <td>${cliente.fechaEntrada}</td>
-            <td>${cliente.fechaSalida}</td>
-            </tr>
-          `
-          document.getElementById('ordenes_tablas').innerHTML += plan;
-        }
-        }).catch(console.error);
-}
-
 window.onload = () => {
     // cargarDatos()
 
