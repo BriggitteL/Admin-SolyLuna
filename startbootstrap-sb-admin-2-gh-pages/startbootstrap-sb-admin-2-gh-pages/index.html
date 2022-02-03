@@ -20,11 +20,6 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
 
-    <script
-    type="text/javascript"
-    src="https://code.jquery.com/jquery-1.9.1.js"></script>
-    
-    
 </head>
 
 <body id="page-top">
@@ -70,29 +65,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Usuarios</span></a>
+                    <span>Huéspedes</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Nav Item - Reservas -->
-            <li class="nav-item">
-                <a class="nav-link" href="reservas.html">
-                    <i class="fas fa-fw fa-calendar"></i>
-                    <span>Reservas</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Nav Item - Reportes -->
-            <li class="nav-item">
-                <a class="nav-link" href="reportes.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Reportes</span></a>
-            </li>
-  
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -289,19 +264,14 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Habitaciones con más reservas</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Huespedes registrados de cada país</h6>
                                     
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <div class="col d-flex justify-content-center">
-                                            <a href="areachart.html"><button class="btn btn-primary" type="button">Visualizar</button></a>
-                                            
-                                        </div>
-
+                                    <div class="chart-area">
+                                        <canvas id="myAreaChart"></canvas>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -312,19 +282,17 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Valoración de tipos de habitaciones</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Fuentes de visitas</h6>
                                     
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
-                                        <div class="col d-flex justify-content-center">
-                                            <a href="piechart.html"><button class="btn btn-primary" type="button">Visualizar</button></a>
-                                            
-                                        </div>
-
+                                        <canvas id="myPieChart"></canvas>
                                     </div>
-                                    
+                                    <div id= 'tiposHabitaciones'class="mt-4 text-center small">
+                                        
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -332,26 +300,23 @@
 
                     <!-- Content Row -->
                     <div class="row">
+                        
 
                         <!-- Content Column -->
-                        <div class="col-lg-6 mb-4">
-                           
-                            <!-- Bar Chart -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Paises que más nos visitan</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <div class="col d-flex justify-content-center">
-                                            <a href="barchart.html"><button class="btn btn-primary" type="button">Visualizar</button></a>
-                                            
-                                        </div>
-
-                                    </div>
+                        <div class="card shadow col-lg-6 mb-4 ml-3">
+                            <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Habitaciones reservadas</h6>
                                     
                                 </div>
+
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-bar">
+                                    <canvas id="myBarChart"></canvas>
+                                </div>
                             </div>
+
                             
 
                         </div>
@@ -420,6 +385,7 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="js/demo/chart-bar-demo.js"></script>
 
 </body>
 
